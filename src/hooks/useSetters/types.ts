@@ -1,4 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
+import * as H from 'history'
+
 
 export interface IGetters {
   data?: any
@@ -10,6 +12,7 @@ export interface ISetters {
   setData: Dispatch<SetStateAction<any>>
   setLoading: Dispatch<SetStateAction<boolean>>
   setErrors: Dispatch<SetStateAction<ErrorsType>>
+  history: H.History
 }
 
 export type ErrorsType = { [index: string]: string }

@@ -9,6 +9,7 @@ export interface IUserLogin {
 export interface IUserRegister {
   username: string
   password: string
+  repeatedPassword: string
 }
 
 /* Todos */

@@ -22,7 +22,7 @@ const API = {
     },
     register: async (props: IUserRegister) => {
       return await Responses(
-        instance.post('/registger', props),
+        instance.post('/register', props),
       )
     },
   },

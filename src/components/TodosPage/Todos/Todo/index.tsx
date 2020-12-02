@@ -27,7 +27,7 @@ const Todo: FC<T> = (props) => {
             <div className="Todo__title">{todo.title}</div>
             <div className="Todo__description">{todo.description}</div>
           </Grid>
-          <Grid item xs={1} className="Todo__mark">
+          <Grid className="Todo__mark" item xs={1}>
             {todo.done ? (
               <Done className="Todo__doneIcon" fontSize="large" />
             ) : (

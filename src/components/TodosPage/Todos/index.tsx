@@ -24,7 +24,7 @@ const Todos: FC = () => {
   }
 
   return (
-    <Card variant="outlined" color="primary" className="Todos">
+    <Card className="Todos" variant="outlined" color="primary">
       {todos.map((todo) => (
         <Todo key={todo.id} todo={todo} />
       ))}

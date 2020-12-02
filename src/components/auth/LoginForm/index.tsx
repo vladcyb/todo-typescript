@@ -20,10 +20,10 @@ const LoginForm: FC = () => {
     <Card className="LoginForm">
       <form onSubmit={handleSubmit} autoComplete="off">
         <Box mt={1}>
-          <TextField className="LoginForm__field" label="Login" {...login} fullWidth />
+          <TextField label="Login" {...login} fullWidth />
         </Box>
         <Box mt={1}>
-          <TextField className="LoginForm__field" label="Password" {...password} fullWidth />
+          <TextField type="password" label="Password" {...password} fullWidth />
         </Box>
         <Box mt={2}>
           <Button type="submit" variant="contained" fullWidth color="primary">

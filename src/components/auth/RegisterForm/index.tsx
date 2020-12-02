@@ -20,13 +20,13 @@ function RegisterForm() {
     <Card className="RegisterForm">
       <form className="" onSubmit={handleSubmit} autoComplete="off">
         <Box mt={1}>
-          <TextField className="RegisterForm__field" label="Login" {...login} fullWidth />
+          <TextField label="Login" {...login} fullWidth />
         </Box>
         <Box mt={1}>
-          <TextField className="RegisterForm__field" label="Password" {...password} fullWidth />
+          <TextField type="password" label="Password" {...password} fullWidth />
         </Box>
         <Box mt={1}>
-          <TextField className="RegisterForm__field" label="Repeat password" {...repeatedPassword} fullWidth />
+          <TextField type="password" label="Repeat password" {...repeatedPassword} fullWidth />
         </Box>
         <Box mt={2}>
           <Button type="submit" variant="contained" fullWidth color="primary">

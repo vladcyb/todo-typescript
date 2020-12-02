@@ -1,12 +1,12 @@
-import LoginForm from '../LoginForm'
+import RegisterForm from '../RegisterForm'
 import CennterColumn from '../../../ui/components/CenterColumn'
 
-function LoginPage() {
+function RegisterPage() {
   return (
     <CennterColumn>
-      <LoginForm />
+      <RegisterForm />
     </CennterColumn>
   )
 }
 
-export default LoginPage
+export default RegisterPage

@@ -1,7 +1,7 @@
 import { FC } from 'react'
-import Field from '../../../ui/components/Field'
 import useField from '../../../hooks/useField'
 import './s.scss'
+import { Box, Button, Card, TextField } from '@material-ui/core'
 
 
 const LoginForm: FC = () => {
@@ -9,18 +9,29 @@ const LoginForm: FC = () => {
   /* methods */
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(username, password)
+    console.log(login.value, password.value)
   }
 
   /* hooks */
-  const username = useField()
+  const login = useField()
   const password = useField()
 
   return (
-    <form className="LoginForm" onSubmit={handleSubmit} autoComplete="off">
-      <Field className="LoginForm__field" name="username" label="Username" {...username} />
-      <Field className="LoginForm__field" name="password" label="Password" {...password} />
-    </form>
+    <Card className="LoginForm">
+      <form onSubmit={handleSubmit} autoComplete="off">
+        <Box mt={1}>
+          <TextField className="LoginForm__field" label="Login" {...login} fullWidth />
+        </Box>
+        <Box mt={1}>
+          <TextField className="LoginForm__field" label="Password" {...password} fullWidth />
+        </Box>
+        <Box mt={2}>
+          <Button type="submit" variant="contained" fullWidth color="primary">
+            Login
+          </Button>
+        </Box>
+      </form>
+    </Card>
   )
 }
 

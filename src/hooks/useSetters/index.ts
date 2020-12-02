@@ -13,6 +13,13 @@ export const useSetters = (config: SettersConfigType = {}): [IGetters, ISetters]
   /* hooks */
   const history = useHistory()
 
+  /* methods */
+  const clearFieldError = (name: string) => {
+    const newErrors = { ...errors }
+    delete newErrors[name]
+    setErrors(newErrors)
+  }
+
   /* getters */
   const getters: IGetters = {
     data,
@@ -26,6 +33,7 @@ export const useSetters = (config: SettersConfigType = {}): [IGetters, ISetters]
     setLoading,
     setErrors,
     history,
+    clearFieldError,
   }
 
   return [getters, setters]

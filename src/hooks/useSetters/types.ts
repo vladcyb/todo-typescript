@@ -13,6 +13,7 @@ export interface ISetters {
   setLoading: Dispatch<SetStateAction<boolean>>
   setErrors: Dispatch<SetStateAction<ErrorsType>>
   history: H.History
+  clearFieldError: (name: string) => void
 }
 
 export type ErrorsType = { [index: string]: string }

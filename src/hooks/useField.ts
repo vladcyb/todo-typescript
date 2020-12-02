@@ -20,7 +20,7 @@ const useField = (
 
   /* methods */
   const onChange = (e: React.ChangeEvent<any>) => {
-    setters.setErrors({})
+    setters.clearFieldError(name)
     setValue(e.target.value)
   }
 

@@ -21,15 +21,17 @@
 
 .Todo__doneIcon {
   color: #0c7000;
-  cursor: pointer;
 }
 
 .Todo__notDoneIcon {
   color: #ff4646;
-  cursor: pointer;
 }
 
 .Todo_done .Todo__card {
   background-color: #efefef;
   color: gray;
+}
+
+.Todo__toggle {
+  padding: 0 !important;
 }

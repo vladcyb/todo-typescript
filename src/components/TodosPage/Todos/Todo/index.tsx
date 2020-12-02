@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { TodoWithoutIdType } from '../../../../store/todosReducer/types'
-import { Box, Card, Grid } from '@material-ui/core'
+import { Box, Card, Grid, IconButton } from '@material-ui/core'
 import './s.scss'
 import { Cancel, Done } from '@material-ui/icons'
 import classNames from 'classnames'
@@ -19,6 +19,12 @@ const Todo: FC<T> = (props) => {
     Todo_done: todo.done,
   })
 
+  /* methods */
+  const toggle = () => {
+    console.log('toggle')
+  }
+
+
   return (
     <Box className={classes} mt={1}>
       <Card className="Todo__card">
@@ -29,9 +35,13 @@ const Todo: FC<T> = (props) => {
           </Grid>
           <Grid className="Todo__mark" item xs={1}>
             {todo.done ? (
-              <Done className="Todo__doneIcon" fontSize="large" />
+              <IconButton className="Todo__toggle" onClick={toggle}>
+                <Done className="Todo__doneIcon" fontSize="large" />
+              </IconButton>
             ) : (
-              <Cancel className="Todo__notDoneIcon" fontSize="large" />
+              <IconButton className="Todo__toggle" onClick={toggle}>
+                <Cancel className="Todo__notDoneIcon" fontSize="large" />
+              </IconButton>
             )}
           </Grid>
         </Grid>

@@ -28,7 +28,7 @@ const Todos: FC = () => {
         <Todo key={todo.id} todo={todo} />
       ))}
       <form onSubmit={handleAddTodo}>
-        <Box mt={1}>
+        <Box mt={2}>
           <TextField label="Title" fullWidth {...title} />
         </Box>
         <Box mt={1}>

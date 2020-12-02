@@ -1,9 +1,9 @@
 import Todos from './Todos'
-import CenterColumn from '../../ui/components/CenterColumn'
 import { useLayoutEffect } from 'react'
 import { useAppDispatch } from '../../store'
 import todos from '../../assets/todos.json'
 import { actions as todosActions } from '../../store/todosReducer'
+import { Grid } from '@material-ui/core'
 
 
 function TodosPage() {
@@ -16,9 +16,9 @@ function TodosPage() {
   }, [])
 
   return (
-    <CenterColumn>
+    <Grid item xs={12} sm={8} md={6} lg={4}>
       <Todos />
-    </CenterColumn>
+    </Grid>
   )
 }
 

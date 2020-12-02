@@ -17,15 +17,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
 }
 
 .Todo__doneIcon {
   color: #0c7000;
+  cursor: pointer;
 }
 
 .Todo__notDoneIcon {
   color: #ff4646;
+  cursor: pointer;
 }
 
 .Todo_done .Todo__card {

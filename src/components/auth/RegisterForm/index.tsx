@@ -13,7 +13,6 @@ function RegisterForm() {
   /* methods */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(login.value, password.value, repeatedPassword.value)
   }
 
   return (

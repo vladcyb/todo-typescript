@@ -19,7 +19,6 @@ const Todos: FC = () => {
   /* methods */
   const handleAddTodo = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(title.value, description.value)
   }
 
   return (

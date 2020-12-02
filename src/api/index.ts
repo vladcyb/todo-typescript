@@ -37,12 +37,14 @@ const API = {
       )
     },
     add: async (props: ITodosAdd) => {
+      const { token, title, description } = props
       return await Responses(
         instance.post('/addTodo', {
-          ...props.todo,
+          title,
+          description,
         }, {
           headers: {
-            Authorization: props.token,
+            Authorization: token,
           },
         }),
       )

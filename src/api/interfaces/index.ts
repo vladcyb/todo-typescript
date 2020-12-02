@@ -1,5 +1,3 @@
-import { TodoWithoutIdType } from '../../store/todosReducer/types'
-
 /* Auth */
 export interface IUserLogin {
   username: string
@@ -19,7 +17,8 @@ export interface ITodosGet {
 
 export interface ITodosAdd {
   token: string
-  todo: TodoWithoutIdType
+  title: string
+  description: string
 }
 
 export interface ITodosSetState {

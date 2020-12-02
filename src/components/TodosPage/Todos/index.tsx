@@ -5,6 +5,9 @@ import { Box, Button, Card, TextField } from '@material-ui/core'
 import useField from '../../../hooks/useField'
 import './s.scss'
 import { useSetters } from '../../../hooks/useSetters'
+import { useAppDispatch } from '../../../store'
+import TodosThunk from '../../../store/todosReducer/thunk'
+import { getUser } from '../../../store/userReducer/selectors'
 
 
 function Todos() {
@@ -13,13 +16,24 @@ function Todos() {
   const todos = useSelector(getTodos)
 
   /* hooks */
-  const [getters, setters] = useSetters()
-  const title = useField('title', getters, setters)
-  const description = useField('description', getters, setters)
+  const [fieldGetters, fieldSetters] = useSetters()
+  const [, setters] = useSetters()
+  const title = useField('title', fieldGetters, fieldSetters)
+  const description = useField('description', fieldGetters, fieldSetters)
+  const dispatch = useAppDispatch()
+  const { token } = useSelector(getUser)
+
+  /* thunk */
+  const thunk = TodosThunk(setters)
 
   /* methods */
   const handleAddTodo = (e: React.FormEvent) => {
     e.preventDefault()
+    dispatch(thunk.addTodo({
+      token,
+      title: title.value,
+      description: description.value,
+    }))
   }
 
   return (

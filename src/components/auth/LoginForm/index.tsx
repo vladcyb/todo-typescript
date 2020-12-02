@@ -25,11 +25,12 @@ const LoginForm: FC = () => {
   }
 
   /* hooks */
-  const username = useField()
-  const password = useField()
+  const username = useField('username', getters, setters)
+  const password = useField('password', getters, setters)
   const dispatch = useAppDispatch()
   const history = useHistory()
   const { token } = useSelector(getUser)
+
   useEffect(() => {
     if (token) {
       history.replace('/todos')
@@ -46,17 +47,13 @@ const LoginForm: FC = () => {
         <TextField
           label="Username"
           fullWidth
-          error={!!getters.errors?.username}
-          helperText={getters.errors?.username || ' '}
           {...username}
         />
         <TextField
           type="password"
           label="Password"
-          {...password}
           fullWidth
-          error={!!getters.errors?.password}
-          helperText={getters.errors?.password || ' '}
+          {...password}
         />
         <Box mt={1}>
           <Button

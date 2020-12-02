@@ -8,15 +8,15 @@ import { useAppDispatch } from '../../../store'
 
 function RegisterForm() {
 
-  /* hooks */
-  const username = useField()
-  const password = useField()
-  const repeatedPassword = useField()
-  const dispatch = useAppDispatch()
-
   /* thunk */
   const [getters, setters] = useSetters()
   const thunk = UserThunk(setters)
+
+  /* hooks */
+  const username = useField('username', getters, setters)
+  const password = useField('password', getters, setters)
+  const repeatedPassword = useField('repeatedPassword', getters, setters)
+  const dispatch = useAppDispatch()
 
   /* methods */
   const handleSubmit = (e: React.FormEvent) => {
@@ -36,26 +36,29 @@ function RegisterForm() {
       <form className="" onSubmit={handleSubmit} autoComplete="off">
         <TextField
           label="Username"
-          {...username}
           fullWidth
           error={!!getters.errors?.username}
           helperText={getters.errors?.username || ' '}
+          value={username.value}
+          onChange={username.onChange}
         />
         <TextField
           type="password"
           label="Password"
-          {...password}
           fullWidth
           error={!!getters.errors?.password}
           helperText={getters.errors?.password || ' '}
+          value={password.value}
+          onChange={password.onChange}
         />
         <TextField
           type="password"
           label="Repeat password"
-          {...repeatedPassword}
           fullWidth
           error={!!getters.errors?.repeatedPassword}
           helperText={getters.errors?.repeatedPassword || ' '}
+          value={repeatedPassword.value}
+          onChange={repeatedPassword.onChange}
         />
         <Box mt={2}>
           <Button

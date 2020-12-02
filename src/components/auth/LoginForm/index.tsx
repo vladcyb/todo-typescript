@@ -1,13 +1,13 @@
 import { FC, useEffect } from 'react'
 import useField from '../../../hooks/useField'
 import './s.scss'
-import { Box, Button, Card, TextField } from '@material-ui/core'
+import { Box, Button, Card, Link, TextField } from '@material-ui/core'
 import { useAppDispatch } from '../../../store'
 import UserThunk from '../../../store/userReducer/thunk'
 import { useSetters } from '../../../hooks/useSetters'
 import { useSelector } from 'react-redux'
 import { getUser } from '../../../store/userReducer/selectors'
-import { useHistory } from 'react-router-dom'
+import { Link as ReactLink, useHistory } from 'react-router-dom'
 import routes from '../../../routes'
 
 const LoginForm: FC = () => {
@@ -68,6 +68,11 @@ const LoginForm: FC = () => {
           </Button>
         </Box>
       </form>
+      <Box mt={2} textAlign="center">
+        <Link component={ReactLink} to={routes.register.root}>
+          Register
+        </Link>
+      </Box>
     </Card>
   )
 }

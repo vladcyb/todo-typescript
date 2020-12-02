@@ -1,9 +1,11 @@
-import { Box, Button, Card, TextField } from '@material-ui/core'
+import { Box, Button, Card, Link, TextField } from '@material-ui/core'
 import useField from '../../../hooks/useField'
 import './s.scss'
 import { useSetters } from '../../../hooks/useSetters'
 import UserThunk from '../../../store/userReducer/thunk'
 import { useAppDispatch } from '../../../store'
+import { Link as ReactLink } from 'react-router-dom'
+import routes from '../../../routes'
 
 
 function RegisterForm() {
@@ -72,6 +74,11 @@ function RegisterForm() {
           </Button>
         </Box>
       </form>
+      <Box mt={2} textAlign="center">
+        <Link component={ReactLink} to={routes.login.root}>
+          Login
+        </Link>
+      </Box>
     </Card>
   )
 }

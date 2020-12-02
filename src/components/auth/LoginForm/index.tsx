@@ -8,6 +8,7 @@ import { useSetters } from '../../../hooks/useSetters'
 import { useSelector } from 'react-redux'
 import { getUser } from '../../../store/userReducer/selectors'
 import { useHistory } from 'react-router-dom'
+import routes from '../../../routes'
 
 const LoginForm: FC = () => {
 
@@ -33,7 +34,7 @@ const LoginForm: FC = () => {
 
   useEffect(() => {
     if (token) {
-      history.replace('/todos')
+      history.replace(routes.todos.root)
     }
     // eslint-disable-next-line
   }, [token])

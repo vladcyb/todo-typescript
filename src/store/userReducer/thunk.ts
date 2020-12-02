@@ -3,6 +3,7 @@ import API from '../../api'
 import { IUserLogin, IUserRegister } from '../../api/interfaces'
 import { ISetters } from '../../hooks/useSetters/types'
 import { actions } from '.'
+import routes from '../../routes'
 
 const UserThunk = (setters: ISetters) => {
 
@@ -71,7 +72,7 @@ const UserThunk = (setters: ISetters) => {
         break
       case 200:
         setters.setLoading(false)
-        setters.history.replace('/login')
+        setters.history.replace(routes.login.root)
         break
       default:
         setters.setLoading(false)

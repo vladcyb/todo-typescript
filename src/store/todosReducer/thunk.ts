@@ -3,6 +3,7 @@ import { ITodosGet, ITodosSetState } from '../../api/interfaces'
 import API from '../../api'
 import { AppDispatch } from '../types'
 import { actions } from '.'
+import { actions as userActions } from '../userReducer'
 
 const TodosThunk = (setters: ISetters) => {
 
@@ -18,6 +19,9 @@ const TodosThunk = (setters: ISetters) => {
           todos: response.data.todos,
         }))
         break
+      case 401:
+        dispatch(userActions.logout())
+        break
       default:
         setLoading(false)
     }
@@ -26,10 +30,24 @@ const TodosThunk = (setters: ISetters) => {
   const setTodoState = (props: ITodosSetState) => async (dispatch: AppDispatch) => {
     setLoading(true)
     const response = await API.Todos.setTodoState(props)
+    switch (response.status) {
+      case 200:
+        setLoading(false)
+        dispatch(actions.toggleTodoState({
+          id: props.id,
+        }))
+        break
+      case 401:
+        dispatch(userActions.logout())
+        break
+      default:
+        setLoading(false)
+    }
   }
 
   return {
     getTodos,
+    setTodoState,
   }
 }
 

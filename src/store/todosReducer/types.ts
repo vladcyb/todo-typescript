@@ -18,3 +18,7 @@ export type SetTodosPayloadType = {
 export type AddTodoPayloadType = {
   todo: TodoType
 }
+
+export type SetTodoStatePayloadType = {
+  id: string
+}

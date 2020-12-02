@@ -1,7 +1,7 @@
 import Todos from './Todos'
 import { useEffect } from 'react'
 import { useAppDispatch } from '../../store'
-import { Box, Button, Grid } from '@material-ui/core'
+import { Box, Button, Grid, Link } from '@material-ui/core'
 import { actions as userActions } from '../../store/userReducer'
 import './s.scss'
 import GridContainer from '../GridContainer'
@@ -14,7 +14,7 @@ import { getUser } from '../../store/userReducer/selectors'
 function TodosPage() {
 
   /* thunk */
-  const [, setters] = useSetters()
+  const [getters, setters] = useSetters({ initialLoading: true })
   const thunk = TodosThunk(setters)
 
   /* hooks */
@@ -40,11 +40,17 @@ function TodosPage() {
           Logout
         </Button>
       </Box>
-      <GridContainer className="TodosPage">
-        <Grid item xs={12} sm={8} md={6} lg={4}>
-          <Todos />
-        </Grid>
-      </GridContainer>
+      {getters.loading ? (
+        <Link className="TodosPageLoading" underline="none" color="secondary">
+          Loading...
+        </Link>
+      ) : (
+        <GridContainer className="TodosPage">
+          <Grid item xs={12} sm={8} md={6} lg={4}>
+            <Todos />
+          </Grid>
+        </GridContainer>
+      )}
     </>
   )
 }

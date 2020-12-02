@@ -1,29 +1,46 @@
 import { FC } from 'react'
-import { TodoWithoutIdType } from '../../../../store/todosReducer/types'
-import { Box, Card, Grid, IconButton } from '@material-ui/core'
+import { TodoType } from '../../../../store/todosReducer/types'
+import { Box, Card, CircularProgress, Grid, IconButton } from '@material-ui/core'
 import './s.scss'
 import { Cancel, Done } from '@material-ui/icons'
 import classNames from 'classnames'
+import { useSetters } from '../../../../hooks/useSetters'
+import { useAppDispatch } from '../../../../store'
+import TodosThunk from '../../../../store/todosReducer/thunk'
+import { useSelector } from 'react-redux'
+import { getUser } from '../../../../store/userReducer/selectors'
 
 type T = {
-  todo: TodoWithoutIdType
+  todo: TodoType
 }
 
 const Todo: FC<T> = (props) => {
 
+  /* hooks */
+  const dispatch = useAppDispatch()
+  const { token } = useSelector(getUser)
+
   /* props */
   const { todo } = props
+
+  /* thunk */
+  const [getters, setters] = useSetters()
+  const thunk = TodosThunk(setters)
+
+  /* methods */
+  const toggle = () => {
+    dispatch(thunk.setTodoState({
+      id: todo.id,
+      token: token,
+      done: !todo.done,
+    }))
+  }
 
   /* classes */
   const classes = classNames('Todo', {
     Todo_done: todo.done,
+    Todo_loading: getters.loading,
   })
-
-  /* methods */
-  const toggle = () => {
-    console.log('toggle')
-  }
-
 
   return (
     <Box className={classes} mt={1}>
@@ -34,14 +51,18 @@ const Todo: FC<T> = (props) => {
             <div className="Todo__description">{todo.description}</div>
           </Grid>
           <Grid className="Todo__mark" item xs={1}>
-            {todo.done ? (
-              <IconButton className="Todo__toggle" onClick={toggle}>
-                <Done className="Todo__doneIcon" fontSize="large" />
-              </IconButton>
+            {getters.loading ? (
+              <div><CircularProgress /></div>
             ) : (
-              <IconButton className="Todo__toggle" onClick={toggle}>
-                <Cancel className="Todo__notDoneIcon" fontSize="large" />
-              </IconButton>
+              todo.done ? (
+                <IconButton className="Todo__toggle" onClick={toggle}>
+                  <Done className="Todo__doneIcon" fontSize="large" />
+                </IconButton>
+              ) : (
+                <IconButton className="Todo__toggle" onClick={toggle}>
+                  <Cancel className="Todo__notDoneIcon" fontSize="large" />
+                </IconButton>
+              )
             )}
           </Grid>
         </Grid>

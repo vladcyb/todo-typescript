@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import Todo from './Todo'
 import { useSelector } from 'react-redux'
 import { getTodos } from '../../../store/todosReducer/selectors'
@@ -8,7 +7,7 @@ import './s.scss'
 import { useSetters } from '../../../hooks/useSetters'
 
 
-const Todos: FC = () => {
+function Todos() {
 
   /* props */
   const todos = useSelector(getTodos)

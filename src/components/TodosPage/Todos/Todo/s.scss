@@ -1,11 +1,34 @@
+.Todo {
+}
+
 .Todo__description {
   word-break: break-all
 }
 
 .Todo__card {
-  padding: 12px;
+  padding: 12px 30px 12px 12px;
 }
 
 .Todo__title {
   font-size: 1.2rem;
+}
+
+.Todo__mark {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.Todo__doneIcon {
+  color: #0c7000;
+}
+
+.Todo__notDoneIcon {
+  color: #ff4646;
+}
+
+.Todo_done .Todo__card {
+  background-color: #efefef;
+  color: gray;
 }

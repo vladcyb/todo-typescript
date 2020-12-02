@@ -1,11 +1,11 @@
 import LoginForm from '../LoginForm'
-import CennterColumn from '../../../ui/components/CenterColumn'
+import CenterColumn from '../../../ui/components/CenterColumn'
 
 function LoginPage() {
   return (
-    <CennterColumn>
+    <CenterColumn>
       <LoginForm />
-    </CennterColumn>
+    </CenterColumn>
   )
 }
 

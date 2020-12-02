@@ -1,16 +1,16 @@
 import { Grid } from '@material-ui/core'
 import { FC } from 'react'
 
-const CennterColumn: FC = (props) => {
+const CenterColumn: FC = (props) => {
 
   /* props */
   const { children } = props
 
   return (
-    <Grid sm={6} md={4} lg={3} xl={2} xs={12}>
+    <Grid item xs={12} sm={8} md={6} lg={4}>
       {children}
     </Grid>
   )
 }
 
-export default CennterColumn
+export default CenterColumn

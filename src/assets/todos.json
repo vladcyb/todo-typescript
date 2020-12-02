@@ -2,21 +2,25 @@
   {
     "id": "1",
     "title": "My first todo",
-    "description": "Wash dishes"
+    "description": "Wash dishes",
+    "done": true
   },
   {
     "id": "2",
     "title": "My second todo",
-    "description": "Clean house"
+    "description": "Clean house",
+    "done": false
   },
   {
     "id": "3",
     "title": "My third todo",
-    "description": "Bake a cake"
+    "description": "Bake a cake",
+    "done": false
   },
   {
     "id": "4",
     "title": "My fourth todo",
-    "description": "Description description description description description description description description description description description description"
+    "description": "Description description description description description description description description description description description description",
+    "done": false
   }
 ]

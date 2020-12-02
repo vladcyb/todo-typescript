@@ -1,6 +1,5 @@
 import React from 'react'
 import './App.scss'
-import { Grid } from '@material-ui/core'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LoginPage from './components/auth/LoginPage'
 import IndexPage from './components/IndexPage'
@@ -17,12 +16,7 @@ function App() {
   const { token } = useSelector(getUser)
 
   return (
-    <Grid
-      className="App"
-      container
-      justify="center"
-      wrap="nowrap"
-    >
+    <div className="App">
       <Router>
         <Switch>
           <Route path={routes.root} exact>
@@ -39,7 +33,7 @@ function App() {
           </PrivateRoute>
         </Switch>
       </Router>
-    </Grid>
+    </div>
   )
 }
 

@@ -1,20 +1,30 @@
 import Todos from './Todos'
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 import { useAppDispatch } from '../../store'
-import todos from '../../assets/todos.json'
-import { actions as todosActions } from '../../store/todosReducer'
 import { Box, Button, Grid } from '@material-ui/core'
 import { actions as userActions } from '../../store/userReducer'
 import './s.scss'
 import GridContainer from '../GridContainer'
+import { useSetters } from '../../hooks/useSetters'
+import TodosThunk from '../../store/todosReducer/thunk'
+import { useSelector } from 'react-redux'
+import { getUser } from '../../store/userReducer/selectors'
 
 
 function TodosPage() {
 
+  /* thunk */
+  const [, setters] = useSetters()
+  const thunk = TodosThunk(setters)
+
   /* hooks */
   const dispatch = useAppDispatch()
-  useLayoutEffect(() => {
-    dispatch(todosActions.setTodos({ todos }))
+  const { token } = useSelector(getUser)
+
+  useEffect(() => {
+    dispatch(thunk.getTodos({
+      token,
+    }))
     // eslint-disable-next-line
   }, [])
 

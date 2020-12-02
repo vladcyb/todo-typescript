@@ -7,9 +7,14 @@ import IndexPage from './components/IndexPage'
 import routes from './routes'
 import RegisterPage from './components/auth/RegisterPage'
 import TodosPage from './components/TodosPage'
+import PrivateRoute from './components/PrivateRoute'
+import { useSelector } from 'react-redux'
+import { getUser } from './store/userReducer/selectors'
 
 
 function App() {
+
+  const { token } = useSelector(getUser)
 
   return (
     <Grid
@@ -23,15 +28,15 @@ function App() {
           <Route path={routes.root} exact>
             <IndexPage />
           </Route>
-          <Route path={routes.login.root}>
+          <PrivateRoute path={routes.login.root} condition={!token} redirectPath={routes.todos.root}>
             <LoginPage />
-          </Route>
-          <Route path={routes.register.root}>
+          </PrivateRoute>
+          <PrivateRoute path={routes.register.root} condition={!token} redirectPath={routes.todos.root}>
             <RegisterPage />
-          </Route>
-          <Route path={routes.todos.root}>
+          </PrivateRoute>
+          <PrivateRoute path={routes.todos.root} condition={!!token} redirectPath={routes.login.root}>
             <TodosPage />
-          </Route>
+          </PrivateRoute>
         </Switch>
       </Router>
     </Grid>

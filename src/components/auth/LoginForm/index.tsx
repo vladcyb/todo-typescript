@@ -1,13 +1,11 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 import useField from '../../../hooks/useField'
 import './s.scss'
 import { Box, Button, Card, Link, TextField } from '@material-ui/core'
 import { useAppDispatch } from '../../../store'
 import UserThunk from '../../../store/userReducer/thunk'
 import { useSetters } from '../../../hooks/useSetters'
-import { useSelector } from 'react-redux'
-import { getUser } from '../../../store/userReducer/selectors'
-import { Link as ReactLink, useHistory } from 'react-router-dom'
+import { Link as ReactLink } from 'react-router-dom'
 import routes from '../../../routes'
 
 const LoginForm: FC = () => {
@@ -29,15 +27,6 @@ const LoginForm: FC = () => {
   const username = useField('username', getters, setters)
   const password = useField('password', getters, setters)
   const dispatch = useAppDispatch()
-  const history = useHistory()
-  const { token } = useSelector(getUser)
-
-  useEffect(() => {
-    if (token) {
-      history.replace(routes.todos.root)
-    }
-    // eslint-disable-next-line
-  }, [token])
 
   /* vars */
   const isDisabled = getters.loading

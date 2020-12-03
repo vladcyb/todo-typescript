@@ -1,6 +1,13 @@
-.LogoutButton {
+.UserActions {
   right: 10px;
   top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.UserActions__username {
+  padding-right: 10px;
 }
 
 .TodosPageLoading {

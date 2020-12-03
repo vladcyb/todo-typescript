@@ -8,7 +8,7 @@ import GridContainer from '../GridContainer'
 import { useSetters } from '../../hooks/useSetters'
 import TodosThunk from '../../store/todosReducer/thunk'
 import { useSelector } from 'react-redux'
-import { getToken } from '../../store/userReducer/selectors'
+import { getToken, getUsername } from '../../store/userReducer/selectors'
 
 
 function TodosPage() {
@@ -20,6 +20,7 @@ function TodosPage() {
   /* hooks */
   const dispatch = useAppDispatch()
   const token = useSelector(getToken)
+  const username = useSelector(getUsername)
 
   useEffect(() => {
     dispatch(thunk.getTodos({
@@ -35,7 +36,15 @@ function TodosPage() {
 
   return (
     <>
-      <Box className="LogoutButton" position="absolute">
+      <Box className="UserActions" position="absolute">
+        <Link
+          className="UserActions__username"
+          underline="none"
+          color="primary"
+          display="block"
+        >
+          {username}
+        </Link>
         <Button onClick={handleLogout} color="secondary">
           Logout
         </Button>

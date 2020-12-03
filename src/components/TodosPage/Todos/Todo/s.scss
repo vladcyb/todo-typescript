@@ -9,7 +9,7 @@
   padding: 12px;
   min-height: 70px;
   display: grid;
-  grid-template-columns: 1fr 50px;
+  grid-template-columns: 1fr 70px;
 }
 
 .Todo__title {
@@ -17,9 +17,10 @@
   padding-bottom: 10px;
 }
 
-.Todo__mark {
+.Todo__actions {
   display: flex;
   justify-content: center;
+  gap: 10px;
   align-items: center;
 }
 

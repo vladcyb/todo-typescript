@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { TodoType } from '../../../../store/todosReducer/types'
 import { Box, Card, CircularProgress, IconButton } from '@material-ui/core'
 import './s.scss'
-import { Cancel, Done } from '@material-ui/icons'
+import { Cancel, Delete, Done } from '@material-ui/icons'
 import classNames from 'classnames'
 import { useSetters } from '../../../../hooks/useSetters'
 import { useAppDispatch } from '../../../../store'
@@ -48,7 +48,10 @@ const Todo: FC<T> = (props) => {
           <div className="Todo__title">{todo.title}</div>
           <div className="Todo__description">{todo.description}</div>
         </div>
-        <div className="Todo__mark">
+        <div className="Todo__actions">
+          <IconButton size="small">
+            <Delete fontSize="small" />
+          </IconButton>
           {getters.loading ? (
             <div><CircularProgress size="30px" /></div>
           ) : (

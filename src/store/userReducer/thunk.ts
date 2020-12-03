@@ -8,7 +8,6 @@ import routes from '../../routes'
 const UserThunk = (setters: ISetters) => {
 
   const login = (props: IUserLogin) => async (dispatch: AppDispatch) => {
-    setters.setErrors({})
     if (!props.username) {
       return setters.setErrors({
         username: 'Enter username',
@@ -41,7 +40,6 @@ const UserThunk = (setters: ISetters) => {
   }
 
   const register = (props: IUserRegister) => async () => {
-    setters.setErrors({})
     if (!props.username) {
       return setters.setErrors({
         username: 'Enter username',

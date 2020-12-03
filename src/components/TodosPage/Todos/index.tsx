@@ -9,7 +9,7 @@ import { useAppDispatch } from '../../../store'
 import TodosThunk from '../../../store/todosReducer/thunk'
 import { getToken } from '../../../store/userReducer/selectors'
 import useDeleteTodo from '../../../hooks/useDeleteTodo'
-import { useState } from 'react'
+import React, { useState } from 'react'
 
 
 function Todos() {
@@ -73,7 +73,7 @@ function Todos() {
   }
 
   return (
-    <Card className="Todos" variant="outlined" color="primary">
+    <Card className="Todos" variant="elevation" color="primary" elevation={5}>
       <Button onClick={handleDeleteDoneClick}>Delete done todos</Button>
       {todos.map((todo) => (
         <Todo key={todo.id} todo={todo} setDeletingTodo={deletingTodo.set} />

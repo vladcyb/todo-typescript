@@ -1,6 +1,6 @@
 import { Dispatch, FC, SetStateAction } from 'react'
 import { TodoType } from '../../../../store/todosReducer/types'
-import { Box, Card, CircularProgress, IconButton } from '@material-ui/core'
+import { Box, Card, CircularProgress, Fade, IconButton } from '@material-ui/core'
 import './s.scss'
 import { Clear, Delete, Done } from '@material-ui/icons'
 import classNames from 'classnames'
@@ -51,34 +51,36 @@ const Todo: FC<T> = (props) => {
   })
 
   return (
-    <Box className={classes} mt={1}>
-      <Card className="Todo__card">
-        <div className="Todo__text">
-          <div className="Todo__title">{todo.title}</div>
-          <div className="Todo__description">{todo.description}</div>
-        </div>
-        <div className="Todo__actions">
-          <IconButton size="small" onClick={handleDeleteClick}>
-            <Delete fontSize="small" />
-          </IconButton>
-          {getters.loading ? (
-            <div className="Todo__progress">
-              <CircularProgress size="30px" />
-            </div>
-          ) : (
-            todo.done ? (
-              <IconButton className="Todo__toggle" onClick={toggle}>
-                <Done className="Todo__doneIcon" fontSize="large" />
-              </IconButton>
+    <Fade in={true}>
+      <Box className={classes} mt={1}>
+        <Card className="Todo__card" elevation={1}>
+          <div className="Todo__text">
+            <div className="Todo__title">{todo.title}</div>
+            <div className="Todo__description">{todo.description}</div>
+          </div>
+          <div className="Todo__actions">
+            <IconButton size="small" onClick={handleDeleteClick}>
+              <Delete fontSize="small" />
+            </IconButton>
+            {getters.loading ? (
+              <div className="Todo__progress">
+                <CircularProgress size="30px" />
+              </div>
             ) : (
-              <IconButton className="Todo__toggle" onClick={toggle}>
-                <Clear className="Todo__notDoneIcon" fontSize="large" />
-              </IconButton>
-            )
-          )}
-        </div>
-      </Card>
-    </Box>
+              todo.done ? (
+                <IconButton className="Todo__toggle" onClick={toggle}>
+                  <Done className="Todo__doneIcon" fontSize="large" />
+                </IconButton>
+              ) : (
+                <IconButton className="Todo__toggle" onClick={toggle}>
+                  <Clear className="Todo__notDoneIcon" fontSize="large" />
+                </IconButton>
+              )
+            )}
+          </div>
+        </Card>
+      </Box>
+    </Fade>
   )
 }
 

@@ -6,11 +6,15 @@
 }
 
 .Todo__card {
-  padding: 12px 30px 12px 12px;
+  padding: 12px;
+  min-height: 70px;
+  display: grid;
+  grid-template-columns: 1fr 50px;
 }
 
 .Todo__title {
   font-size: 1.2rem;
+  padding-bottom: 10px;
 }
 
 .Todo__mark {

@@ -51,10 +51,11 @@ const TodosThunk = (setters: ISetters) => {
     switch (response.status) {
       case 200:
         setLoading(false)
-        console.log(response.data)
-        dispatch(actions.addTodo({
-          todo: response.data.todo,
-        }))
+        if (response.data.ok) {
+          dispatch(actions.addTodo({
+            todo: response.data.todo,
+          }))
+        }
         break
       default:
         setLoading(false)

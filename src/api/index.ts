@@ -13,6 +13,10 @@ import {
 import instance from './axios'
 import Responses from './methods/Responses'
 
+const getAuthConfig = (token: string) => {
+  return { headers: { Authorization: token } }
+}
+
 const API = {
   User: {
     login: async (props: IUserLogin) => {
@@ -29,11 +33,7 @@ const API = {
   Todos: {
     get: async (props: ITodosGet) => {
       return await Responses(
-        instance.get('/todos', {
-          headers: {
-            Authorization: props.token,
-          },
-        }),
+        instance.get('/todos', getAuthConfig(props.token)),
       )
     },
     add: async (props: ITodosAdd) => {
@@ -42,11 +42,7 @@ const API = {
         instance.post('/addTodo', {
           title,
           description,
-        }, {
-          headers: {
-            Authorization: token,
-          },
-        }),
+        }, getAuthConfig(token)),
       )
     },
     setTodoState: async (props: ITodosSetState) => {
@@ -54,19 +50,13 @@ const API = {
         instance.post('/setDone', {
           id: props.id,
           done: props.done,
-        }, {
-          headers: {
-            Authorization: props.token,
-          },
-        }),
+        }, getAuthConfig(props.token)),
       )
     },
     delete: async (props: ITodosDelete) => {
       return await Responses(
         instance.delete('/deleteTodo', {
-          headers: {
-            Authorization: props.token,
-          },
+          ...getAuthConfig(props.token),
           data: {
             id: props.id,
           },
@@ -75,44 +65,28 @@ const API = {
     },
     deleteDone: async (props: ITodosDeleteDone) => {
       return await Responses(
-        instance.delete('/delDone', {
-          headers: {
-            Authorization: props.token,
-          },
-        }),
+        instance.delete('/delDone', getAuthConfig(props.token)),
       )
     },
   },
   Theme: {
     get: async (props: IThemeGet) => {
       return await Responses(
-        instance.get('/theme', {
-          headers: {
-            Authorization: props.token,
-          },
-        }),
+        instance.get('/theme', getAuthConfig(props.token)),
       )
     },
     setBackgroundColor: async (props: IThemeSetBg) => {
       return await Responses(
         instance.post('/setBG', {
           bg: props.bg,
-        }, {
-          headers: {
-            Authorization: props.token,
-          },
-        }),
+        }, getAuthConfig(props.token)),
       )
     },
     setDarkMode: async (props: IThemeSetDarkMode) => {
       return await Responses(
         instance.post('/setDarkMode', {
           darkMode: props.darkMode,
-        }, {
-          headers: {
-            Authorization: props.token,
-          },
-        }),
+        }, getAuthConfig(props.token)),
       )
     },
   },

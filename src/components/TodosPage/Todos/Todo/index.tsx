@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { TodoType } from '../../../../store/todosReducer/types'
 import { Box, Card, CircularProgress, IconButton } from '@material-ui/core'
 import './s.scss'
-import { Cancel, Delete, Done } from '@material-ui/icons'
+import { Clear, Delete, Done } from '@material-ui/icons'
 import classNames from 'classnames'
 import { useSetters } from '../../../../hooks/useSetters'
 import { useAppDispatch } from '../../../../store'
@@ -53,7 +53,9 @@ const Todo: FC<T> = (props) => {
             <Delete fontSize="small" />
           </IconButton>
           {getters.loading ? (
-            <div><CircularProgress size="30px" /></div>
+            <div className="Todo__progress">
+              <CircularProgress size="30px" />
+            </div>
           ) : (
             todo.done ? (
               <IconButton className="Todo__toggle" onClick={toggle}>
@@ -61,7 +63,7 @@ const Todo: FC<T> = (props) => {
               </IconButton>
             ) : (
               <IconButton className="Todo__toggle" onClick={toggle}>
-                <Cancel className="Todo__notDoneIcon" fontSize="large" />
+                <Clear className="Todo__notDoneIcon" fontSize="large" />
               </IconButton>
             )
           )}

@@ -40,3 +40,10 @@
 .Todo__toggle {
   padding: 0 !important;
 }
+
+.Todo__progress {
+  min-width: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

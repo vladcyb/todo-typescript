@@ -20,8 +20,8 @@ const useDeleteTodo = (): ReturnedType => {
   }
 
   return {
-    deletingTodo,
-    setDeletingTodo,
+    get: deletingTodo,
+    set: setDeletingTodo,
     props: {
       open: !!deletingTodo.id,
       onClose,

@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction } from 'react'
 
 export type ReturnedType = {
-  deletingTodo: StateType
-  setDeletingTodo: Dispatch<SetStateAction<StateType>>
+  get: StateType
+  set: Dispatch<SetStateAction<StateType>>
   props: {
     open: boolean
     onClose: () => void

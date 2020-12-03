@@ -22,7 +22,7 @@ function Todos() {
   const description = useField('description', getters, setters)
   const dispatch = useAppDispatch()
   const token = useSelector(getToken)
-  const deleteTodo = useDeleteTodo()
+  const deletingTodo = useDeleteTodo()
 
   /* thunk */
   const thunk = TodosThunk(setters)
@@ -52,22 +52,22 @@ function Todos() {
   }
 
   const handleCancelDelete = () => {
-    deleteTodo.props.onClose()
+    deletingTodo.props.onClose()
   }
 
   const handleDeleteTodo = () => {
     dispatch(thunk.deleteTodo({
       token,
-      id: deleteTodo.deletingTodo.id,
+      id: deletingTodo.get.id,
     }))
-    deleteTodo.props.onClose()
+    deletingTodo.props.onClose()
   }
 
   return (
     <Card className="Todos" variant="outlined" color="primary">
       <Button onClick={handleDeleteDone}>Delete done todos</Button>
       {todos.map((todo) => (
-        <Todo key={todo.id} todo={todo} setDeletingTodo={deleteTodo.setDeletingTodo} />
+        <Todo key={todo.id} todo={todo} setDeletingTodo={deletingTodo.set} />
       ))}
       <form onSubmit={handleAddTodo}>
         <Box mt={2}>
@@ -98,8 +98,8 @@ function Todos() {
           </Button>
         </Box>
       </form>
-      <Dialog {...deleteTodo.props}>
-        <DialogTitle>Delete {deleteTodo.deletingTodo.title}?</DialogTitle>
+      <Dialog {...deletingTodo.props}>
+        <DialogTitle>Delete {deletingTodo.get.title}?</DialogTitle>
         <DialogActions>
           <Button onClick={handleDeleteTodo} color="secondary">Yes</Button>
           <Button onClick={handleCancelDelete}>Cancel</Button>

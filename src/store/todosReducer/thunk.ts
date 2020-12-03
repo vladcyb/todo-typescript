@@ -1,5 +1,5 @@
 import { ISetters } from '../../hooks/useSetters/types'
-import { ITodosAdd, ITodosDelete, ITodosGet, ITodosSetState } from '../../api/interfaces'
+import { ITodosAdd, ITodosDelete, ITodosDeleteDone, ITodosGet, ITodosSetState } from '../../api/interfaces'
 import API from '../../api'
 import { AppDispatch } from '../types'
 import { actions } from '.'
@@ -85,11 +85,27 @@ const TodosThunk = (setters: ISetters) => {
     }
   }
 
+  const deleteDone = (props: ITodosDeleteDone) => async (dispatch: AppDispatch) => {
+    setLoading(true)
+    const response = await API.Todos.deleteDone(props)
+    switch (response.status) {
+      case 200:
+        setLoading(false)
+        dispatch(actions.setTodos({
+          todos: response.data.res,
+        }))
+        break
+      default:
+        setLoading(false)
+    }
+  }
+
   return {
     getTodos,
     setTodoState,
     addTodo,
     deleteTodo,
+    deleteDone,
   }
 }
 

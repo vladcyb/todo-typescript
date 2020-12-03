@@ -9,7 +9,6 @@ import { useAppDispatch } from '../../../store'
 import TodosThunk from '../../../store/todosReducer/thunk'
 import { getUser } from '../../../store/userReducer/selectors'
 
-
 function Todos() {
 
   /* props */
@@ -43,8 +42,15 @@ function Todos() {
     }
   }
 
+  const handleDeleteDone = () => {
+    dispatch(thunk.deleteDone({
+      token,
+    }))
+  }
+
   return (
     <Card className="Todos" variant="outlined" color="primary">
+      <Button onClick={handleDeleteDone}>Delete done todos</Button>
       {todos.map((todo) => (
         <Todo key={todo.id} todo={todo} />
       ))}

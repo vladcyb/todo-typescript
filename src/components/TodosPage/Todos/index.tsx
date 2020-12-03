@@ -1,13 +1,15 @@
 import Todo from './Todo'
 import { useSelector } from 'react-redux'
 import { getTodos } from '../../../store/todosReducer/selectors'
-import { Box, Button, Card, TextField } from '@material-ui/core'
+import { Box, Button, Card, Dialog, DialogActions, DialogTitle, TextField } from '@material-ui/core'
 import useField from '../../../hooks/useField'
 import './s.scss'
 import { useSetters } from '../../../hooks/useSetters'
 import { useAppDispatch } from '../../../store'
 import TodosThunk from '../../../store/todosReducer/thunk'
 import { getToken } from '../../../store/userReducer/selectors'
+import useDeleteTodo from '../../../hooks/useDeleteTodo'
+
 
 function Todos() {
 
@@ -20,6 +22,7 @@ function Todos() {
   const description = useField('description', getters, setters)
   const dispatch = useAppDispatch()
   const token = useSelector(getToken)
+  const deleteTodo = useDeleteTodo()
 
   /* thunk */
   const thunk = TodosThunk(setters)
@@ -48,11 +51,23 @@ function Todos() {
     }))
   }
 
+  const handleCancelDelete = () => {
+    deleteTodo.props.onClose()
+  }
+
+  const handleDeleteTodo = () => {
+    dispatch(thunk.deleteTodo({
+      token,
+      id: deleteTodo.deletingTodo.id,
+    }))
+    deleteTodo.props.onClose()
+  }
+
   return (
     <Card className="Todos" variant="outlined" color="primary">
       <Button onClick={handleDeleteDone}>Delete done todos</Button>
       {todos.map((todo) => (
-        <Todo key={todo.id} todo={todo} />
+        <Todo key={todo.id} todo={todo} setDeletingTodo={deleteTodo.setDeletingTodo} />
       ))}
       <form onSubmit={handleAddTodo}>
         <Box mt={2}>
@@ -83,6 +98,13 @@ function Todos() {
           </Button>
         </Box>
       </form>
+      <Dialog {...deleteTodo.props}>
+        <DialogTitle>Delete {deleteTodo.deletingTodo.title}?</DialogTitle>
+        <DialogActions>
+          <Button onClick={handleDeleteTodo} color="secondary">Yes</Button>
+          <Button onClick={handleCancelDelete}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
     </Card>
   )
 }

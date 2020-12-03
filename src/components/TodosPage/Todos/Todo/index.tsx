@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { Dispatch, FC, SetStateAction } from 'react'
 import { TodoType } from '../../../../store/todosReducer/types'
 import { Box, Card, CircularProgress, IconButton } from '@material-ui/core'
 import './s.scss'
@@ -9,9 +9,11 @@ import { useAppDispatch } from '../../../../store'
 import TodosThunk from '../../../../store/todosReducer/thunk'
 import { useSelector } from 'react-redux'
 import { getToken } from '../../../../store/userReducer/selectors'
+import { StateType as DeletingTodoType } from '../../../../hooks/useDeleteTodo/types'
 
 type T = {
   todo: TodoType
+  setDeletingTodo: Dispatch<SetStateAction<DeletingTodoType>>
 }
 
 const Todo: FC<T> = (props) => {
@@ -21,7 +23,7 @@ const Todo: FC<T> = (props) => {
   const token = useSelector(getToken)
 
   /* props */
-  const { todo } = props
+  const { todo, setDeletingTodo } = props
 
   /* thunk */
   const [getters, setters] = useSetters()
@@ -37,10 +39,10 @@ const Todo: FC<T> = (props) => {
   }
 
   const handleDelete = () => {
-    dispatch(thunk.deleteTodo({
-      token,
+    setDeletingTodo({
       id: todo.id,
-    }))
+      title: todo.title,
+    })
   }
 
   /* classes */

@@ -8,6 +8,7 @@ type ReturnedType = {
     error: boolean
     helperText: string
   }
+  reset: () => void
 }
 
 const useField = (
@@ -35,6 +36,9 @@ const useField = (
       onChange,
       error: !!errors[name],
       helperText: errors[name] || ' ',
+    },
+    reset: () => {
+      setValue('')
     },
   }
 }

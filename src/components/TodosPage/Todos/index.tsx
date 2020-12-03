@@ -33,6 +33,9 @@ function Todos() {
       token,
       title: title.props.value,
       description: description.props.value,
+    }, () => {
+      title.reset()
+      description.reset()
     }))
   }
 
@@ -46,8 +49,7 @@ function Todos() {
           <TextField
             label="Title"
             fullWidth
-            value={title.props.value}
-            onChange={title.props.onChange}
+            {...title.props}
           />
         </Box>
         <Box mt={1}>
@@ -56,8 +58,7 @@ function Todos() {
             multiline
             rows={4}
             fullWidth
-            value={description.props.value}
-            onChange={description.props.onChange}
+            {...description.props}
           />
         </Box>
         <Box mt={2}>

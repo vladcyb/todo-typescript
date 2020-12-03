@@ -45,7 +45,7 @@ const TodosThunk = (setters: ISetters) => {
     }
   }
 
-  const addTodo = (props: ITodosAdd) => async (dispatch: AppDispatch) => {
+  const addTodo = (props: ITodosAdd, onSuccess: () => void) => async (dispatch: AppDispatch) => {
     setLoading(true)
     const response = await API.Todos.add(props)
     switch (response.status) {
@@ -55,6 +55,7 @@ const TodosThunk = (setters: ISetters) => {
           dispatch(actions.addTodo({
             todo: response.data.todo,
           }))
+          onSuccess()
         }
         break
       default:

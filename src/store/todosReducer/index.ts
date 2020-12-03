@@ -1,4 +1,10 @@
-import { AddTodoPayloadType, SetTodosPayloadType, SetTodoStatePayloadType, TodoType } from './types'
+import {
+  AddTodoPayloadType,
+  DeleteTodoPayloadType,
+  SetTodosPayloadType,
+  SetTodoStatePayloadType,
+  TodoType,
+} from './types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type StateType = TodoType[]
@@ -20,6 +26,9 @@ export const todosSlice = createSlice({
       if (found) {
         found.done = !found.done
       }
+    },
+    deleteTodo: (todos, { payload }: PayloadAction<DeleteTodoPayloadType>) => {
+      todos.splice(todos.findIndex((todo) => todo.id === payload.id), 1)
     },
   },
 })

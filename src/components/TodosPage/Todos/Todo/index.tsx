@@ -36,6 +36,13 @@ const Todo: FC<T> = (props) => {
     }))
   }
 
+  const handleDelete = () => {
+    dispatch(thunk.deleteTodo({
+      token,
+      id: todo.id,
+    }))
+  }
+
   /* classes */
   const classes = classNames('Todo', {
     Todo_done: todo.done,
@@ -49,7 +56,7 @@ const Todo: FC<T> = (props) => {
           <div className="Todo__description">{todo.description}</div>
         </div>
         <div className="Todo__actions">
-          <IconButton size="small">
+          <IconButton size="small" onClick={handleDelete}>
             <Delete fontSize="small" />
           </IconButton>
           {getters.loading ? (

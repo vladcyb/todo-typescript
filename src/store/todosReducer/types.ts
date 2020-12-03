@@ -22,3 +22,7 @@ export type AddTodoPayloadType = {
 export type SetTodoStatePayloadType = {
   id: string
 }
+
+export type DeleteTodoPayloadType = {
+  id: string
+}

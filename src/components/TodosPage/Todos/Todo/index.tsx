@@ -38,7 +38,7 @@ const Todo: FC<T> = (props) => {
     }))
   }
 
-  const handleDelete = () => {
+  const handleDeleteClick = () => {
     setDeletingTodo({
       id: todo.id,
       title: todo.title,
@@ -58,7 +58,7 @@ const Todo: FC<T> = (props) => {
           <div className="Todo__description">{todo.description}</div>
         </div>
         <div className="Todo__actions">
-          <IconButton size="small" onClick={handleDelete}>
+          <IconButton size="small" onClick={handleDeleteClick}>
             <Delete fontSize="small" />
           </IconButton>
           {getters.loading ? (

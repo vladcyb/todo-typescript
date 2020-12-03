@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../../store'
 import TodosThunk from '../../../store/todosReducer/thunk'
 import { getToken } from '../../../store/userReducer/selectors'
 import useDeleteTodo from '../../../hooks/useDeleteTodo'
+import { useState } from 'react'
 
 
 function Todos() {
@@ -23,6 +24,7 @@ function Todos() {
   const dispatch = useAppDispatch()
   const token = useSelector(getToken)
   const deletingTodo = useDeleteTodo()
+  const [deleteAllTodosAttempt, setDeleteAllTodosAttempt] = useState(false)
 
   /* thunk */
   const thunk = TodosThunk(setters)
@@ -45,17 +47,20 @@ function Todos() {
     }
   }
 
-  const handleDeleteDone = () => {
-    dispatch(thunk.deleteDone({
-      token,
-    }))
+  const handleDeleteDoneClick = () => {
+    setDeleteAllTodosAttempt(true)
   }
 
-  const handleCancelDelete = () => {
+  const deleteDone = () => {
+    dispatch(thunk.deleteDone({ token }))
+    setDeleteAllTodosAttempt(false)
+  }
+
+  const cancelDelete = () => {
     deletingTodo.props.onClose()
   }
 
-  const handleDeleteTodo = () => {
+  const deleteTodo = () => {
     dispatch(thunk.deleteTodo({
       token,
       id: deletingTodo.get.id,
@@ -63,9 +68,13 @@ function Todos() {
     deletingTodo.props.onClose()
   }
 
+  const cancelDeleteDone = () => {
+    setDeleteAllTodosAttempt(false)
+  }
+
   return (
     <Card className="Todos" variant="outlined" color="primary">
-      <Button onClick={handleDeleteDone}>Delete done todos</Button>
+      <Button onClick={handleDeleteDoneClick}>Delete done todos</Button>
       {todos.map((todo) => (
         <Todo key={todo.id} todo={todo} setDeletingTodo={deletingTodo.set} />
       ))}
@@ -101,8 +110,18 @@ function Todos() {
       <Dialog {...deletingTodo.props}>
         <DialogTitle>Delete {deletingTodo.get.title}?</DialogTitle>
         <DialogActions>
-          <Button onClick={handleDeleteTodo} color="secondary">Yes</Button>
-          <Button onClick={handleCancelDelete}>Cancel</Button>
+          <Button onClick={deleteTodo} color="secondary">Yes</Button>
+          <Button onClick={cancelDelete}>Cancel</Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={deleteAllTodosAttempt}
+        onClose={cancelDeleteDone}
+      >
+        <DialogTitle>Delete all done TODOs?</DialogTitle>
+        <DialogActions>
+          <Button onClick={deleteDone} color="secondary">Yes</Button>
+          <Button onClick={cancelDeleteDone}>Cancel</Button>
         </DialogActions>
       </Dialog>
     </Card>

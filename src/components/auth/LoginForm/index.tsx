@@ -8,6 +8,7 @@ import { useSetters } from '../../../hooks/useSetters'
 import { Link as ReactLink } from 'react-router-dom'
 import routes from '../../../routes'
 
+
 const LoginForm: FC = () => {
 
   /* thunk */
@@ -18,8 +19,8 @@ const LoginForm: FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(thunk.login({
-      username: username.value,
-      password: password.value,
+      username: username.props.value,
+      password: password.props.value,
     }))
   }
 
@@ -37,13 +38,13 @@ const LoginForm: FC = () => {
         <TextField
           label="Username"
           fullWidth
-          {...username}
+          {...username.props}
         />
         <TextField
           type="password"
           label="Password"
           fullWidth
-          {...password}
+          {...password.props}
         />
         <Box mt={1}>
           <Button

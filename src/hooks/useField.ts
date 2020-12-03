@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { IGetters, ISetters } from './useSetters/types'
 
 type ReturnedType = {
-  value: string
-  onChange: (e: React.ChangeEvent<any>) => void
-  error: boolean
-  helperText: string
+  props: {
+    value: string
+    onChange: (e: React.ChangeEvent<any>) => void
+    error: boolean
+    helperText: string
+  }
 }
 
 const useField = (
@@ -28,10 +30,12 @@ const useField = (
   const { errors = {} } = getters
 
   return {
-    value,
-    onChange,
-    error: !!errors[name],
-    helperText: errors[name] || ' ',
+    props: {
+      value,
+      onChange,
+      error: !!errors[name],
+      helperText: errors[name] || ' ',
+    },
   }
 }
 

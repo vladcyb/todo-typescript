@@ -24,9 +24,9 @@ function RegisterForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     dispatch(thunk.register({
-      username: username.value,
-      password: password.value,
-      repeatedPassword: repeatedPassword.value,
+      username: username.props.value,
+      password: password.props.value,
+      repeatedPassword: repeatedPassword.props.value,
     }))
   }
 
@@ -39,28 +39,19 @@ function RegisterForm() {
         <TextField
           label="Username"
           fullWidth
-          error={!!getters.errors?.username}
-          helperText={getters.errors?.username || ' '}
-          value={username.value}
-          onChange={username.onChange}
+          {...username.props}
         />
         <TextField
           type="password"
           label="Password"
           fullWidth
-          error={!!getters.errors?.password}
-          helperText={getters.errors?.password || ' '}
-          value={password.value}
-          onChange={password.onChange}
+          {...password.props}
         />
         <TextField
           type="password"
           label="Repeat password"
           fullWidth
-          error={!!getters.errors?.repeatedPassword}
-          helperText={getters.errors?.repeatedPassword || ' '}
-          value={repeatedPassword.value}
-          onChange={repeatedPassword.onChange}
+          {...repeatedPassword.props}
         />
         <Box mt={2}>
           <Button

@@ -31,8 +31,8 @@ function Todos() {
     e.preventDefault()
     dispatch(thunk.addTodo({
       token,
-      title: title.value,
-      description: description.value,
+      title: title.props.value,
+      description: description.props.value,
     }))
   }
 
@@ -46,8 +46,8 @@ function Todos() {
           <TextField
             label="Title"
             fullWidth
-            value={title.value}
-            onChange={title.onChange}
+            value={title.props.value}
+            onChange={title.props.onChange}
           />
         </Box>
         <Box mt={1}>
@@ -56,8 +56,8 @@ function Todos() {
             multiline
             rows={4}
             fullWidth
-            value={description.value}
-            onChange={description.onChange}
+            value={description.props.value}
+            onChange={description.props.onChange}
           />
         </Box>
         <Box mt={2}>

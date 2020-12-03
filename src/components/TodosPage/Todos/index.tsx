@@ -16,27 +16,31 @@ function Todos() {
   const todos = useSelector(getTodos)
 
   /* hooks */
-  const [fieldGetters, fieldSetters] = useSetters()
-  const [, setters] = useSetters()
-  const title = useField('title', fieldGetters, fieldSetters)
-  const description = useField('description', fieldGetters, fieldSetters)
+  const [getters, setters] = useSetters()
+  const title = useField('title', getters, setters)
+  const description = useField('description', getters, setters)
   const dispatch = useAppDispatch()
   const { token } = useSelector(getUser)
 
   /* thunk */
   const thunk = TodosThunk(setters)
 
+  /* vars */
+  const isSubmitDisabled = getters.loading || (!title.props.value && !description.props.value)
+
   /* methods */
   const handleAddTodo = (e: React.FormEvent) => {
     e.preventDefault()
-    dispatch(thunk.addTodo({
-      token,
-      title: title.props.value,
-      description: description.props.value,
-    }, () => {
-      title.reset()
-      description.reset()
-    }))
+    if (!isSubmitDisabled) {
+      dispatch(thunk.addTodo({
+        token,
+        title: title.props.value,
+        description: description.props.value,
+      }, () => {
+        title.reset()
+        description.reset()
+      }))
+    }
   }
 
   return (
@@ -62,7 +66,15 @@ function Todos() {
           />
         </Box>
         <Box mt={2}>
-          <Button type="submit" variant="outlined" color="primary" fullWidth>Add</Button>
+          <Button
+            type="submit"
+            variant="outlined"
+            color="primary"
+            fullWidth
+            disabled={isSubmitDisabled}
+          >
+            Add
+          </Button>
         </Box>
       </form>
     </Card>

@@ -19,9 +19,9 @@
 
 .Todo__actions {
   display: flex;
-  justify-content: center;
-  gap: 10px;
+  justify-content: space-between;
   align-items: center;
+  width: 70px;
 }
 
 .Todo__doneIcon {

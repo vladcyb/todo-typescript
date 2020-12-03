@@ -8,7 +8,7 @@ import GridContainer from '../GridContainer'
 import { useSetters } from '../../hooks/useSetters'
 import TodosThunk from '../../store/todosReducer/thunk'
 import { useSelector } from 'react-redux'
-import { getUser } from '../../store/userReducer/selectors'
+import { getToken } from '../../store/userReducer/selectors'
 
 
 function TodosPage() {
@@ -19,7 +19,7 @@ function TodosPage() {
 
   /* hooks */
   const dispatch = useAppDispatch()
-  const { token } = useSelector(getUser)
+  const token = useSelector(getToken)
 
   useEffect(() => {
     dispatch(thunk.getTodos({

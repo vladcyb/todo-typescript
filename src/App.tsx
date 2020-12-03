@@ -8,12 +8,12 @@ import RegisterPage from './components/auth/RegisterPage'
 import TodosPage from './components/TodosPage'
 import PrivateRoute from './components/PrivateRoute'
 import { useSelector } from 'react-redux'
-import { getUser } from './store/userReducer/selectors'
+import { getToken } from './store/userReducer/selectors'
 
 
 function App() {
 
-  const { token } = useSelector(getUser)
+  const token = useSelector(getToken)
 
   return (
     <div className="App">

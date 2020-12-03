@@ -7,7 +7,7 @@ import './s.scss'
 import { useSetters } from '../../../hooks/useSetters'
 import { useAppDispatch } from '../../../store'
 import TodosThunk from '../../../store/todosReducer/thunk'
-import { getUser } from '../../../store/userReducer/selectors'
+import { getToken } from '../../../store/userReducer/selectors'
 
 function Todos() {
 
@@ -19,7 +19,7 @@ function Todos() {
   const title = useField('title', getters, setters)
   const description = useField('description', getters, setters)
   const dispatch = useAppDispatch()
-  const { token } = useSelector(getUser)
+  const token = useSelector(getToken)
 
   /* thunk */
   const thunk = TodosThunk(setters)

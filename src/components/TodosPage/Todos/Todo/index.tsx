@@ -8,7 +8,7 @@ import { useSetters } from '../../../../hooks/useSetters'
 import { useAppDispatch } from '../../../../store'
 import TodosThunk from '../../../../store/todosReducer/thunk'
 import { useSelector } from 'react-redux'
-import { getUser } from '../../../../store/userReducer/selectors'
+import { getToken } from '../../../../store/userReducer/selectors'
 
 type T = {
   todo: TodoType
@@ -18,7 +18,7 @@ const Todo: FC<T> = (props) => {
 
   /* hooks */
   const dispatch = useAppDispatch()
-  const { token } = useSelector(getUser)
+  const token = useSelector(getToken)
 
   /* props */
   const { todo } = props

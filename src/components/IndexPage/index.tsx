@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import { getUser } from '../../store/userReducer/selectors'
+import { getToken } from '../../store/userReducer/selectors'
 import { Redirect } from 'react-router-dom'
 import routes from '../../routes'
 
@@ -7,7 +7,7 @@ import routes from '../../routes'
 function IndexPage() {
 
   /* hooks */
-  const { token } = useSelector(getUser)
+  const token = useSelector(getToken)
 
   return (
     <Redirect to={token ? routes.todos.root : routes.login.root} />

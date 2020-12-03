@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { SetTokenPayloadType, SetUsernamePayloadType } from './types'
+import { SetTokenAndUsernamePayloadType } from './types'
 
 const initialState = {
   username: '',
@@ -10,15 +10,11 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setToken: (state, { payload }: PayloadAction<SetTokenPayloadType>) => {
+    setTokenAndUsername: (state, { payload }: PayloadAction<SetTokenAndUsernamePayloadType>) => {
       state.token = payload.token
-    },
-    setUsername: (state, { payload }: PayloadAction<SetUsernamePayloadType>) => {
       state.username = payload.username
     },
-    logout: (state) => {
-      state.token = ''
-    }
+    logout: () => initialState,
   },
 })
 

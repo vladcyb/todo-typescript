@@ -30,8 +30,9 @@ const UserThunk = (setters: ISetters) => {
         setters.setErrors(errors)
         break
       case 200:
-        dispatch(actions.setToken({
+        dispatch(actions.setTokenAndUsername({
           token: `Bearer ${response.data.token}`,
+          username: props.username,
         }))
         break
       default:

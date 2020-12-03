@@ -1,7 +1,4 @@
-export type SetTokenPayloadType = {
+export type SetTokenAndUsernamePayloadType = {
   token: string
-}
-
-export type SetUsernamePayloadType = {
   username: string
 }

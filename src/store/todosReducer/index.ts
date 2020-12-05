@@ -6,6 +6,7 @@ import {
   TodoType,
 } from './types'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import globalActions from '../globalActions'
 
 type StateType = TodoType[]
 
@@ -31,6 +32,12 @@ export const todosSlice = createSlice({
       todos.splice(todos.findIndex((todo) => todo.id === payload.id), 1)
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(globalActions.logout, () => {
+        return initialState
+      })
+  }
 })
 
 export const { actions } = todosSlice

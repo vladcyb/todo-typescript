@@ -2,13 +2,13 @@ import Todos from './Todos'
 import { useEffect } from 'react'
 import { useAppDispatch } from '../../store'
 import { Box, Button, Grid, Link } from '@material-ui/core'
-import { actions as userActions } from '../../store/userReducer'
 import './s.scss'
 import GridContainer from '../GridContainer'
 import { useSetters } from '../../hooks/useSetters'
 import TodosThunk from '../../store/todosReducer/thunk'
 import { useSelector } from 'react-redux'
 import { getToken, getUsername } from '../../store/userReducer/selectors'
+import globalActions from '../../store/globalActions'
 
 
 function TodosPage() {
@@ -31,7 +31,7 @@ function TodosPage() {
 
   /* methods */
   const handleLogout = () => {
-    dispatch(userActions.logout())
+    dispatch(globalActions.logout())
   }
 
   return (

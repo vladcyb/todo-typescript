@@ -3,7 +3,7 @@ import { ITodosAdd, ITodosDelete, ITodosDeleteDone, ITodosGet, ITodosSetState } 
 import API from '../../api'
 import { AppDispatch } from '../types'
 import { actions } from '.'
-import { actions as userActions } from '../userReducer'
+import globalActions from '../globalActions'
 
 const TodosThunk = (setters: ISetters) => {
 
@@ -20,7 +20,7 @@ const TodosThunk = (setters: ISetters) => {
         }))
         break
       case 401:
-        dispatch(userActions.logout())
+        dispatch(globalActions.logout())
         break
       default:
         setLoading(false)
@@ -38,7 +38,7 @@ const TodosThunk = (setters: ISetters) => {
         }))
         break
       case 401:
-        dispatch(userActions.logout())
+        dispatch(globalActions.logout())
         break
       default:
         setLoading(false)
@@ -60,7 +60,7 @@ const TodosThunk = (setters: ISetters) => {
         break
       case 401:
         setLoading(false)
-        dispatch(userActions.logout())
+        dispatch(globalActions.logout())
         break
       default:
         setLoading(false)
@@ -78,7 +78,7 @@ const TodosThunk = (setters: ISetters) => {
         }))
         break
       case 401:
-        dispatch(userActions.logout())
+        dispatch(globalActions.logout())
         break
       default:
         setLoading(false)

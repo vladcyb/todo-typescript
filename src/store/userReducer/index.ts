@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { SetTokenAndUsernamePayloadType } from './types'
+import globalActions from '../globalActions'
 
 const initialState = {
   username: '',
@@ -14,7 +15,12 @@ export const userSlice = createSlice({
       state.token = payload.token
       state.username = payload.username
     },
-    logout: () => initialState,
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(globalActions.logout, () => {
+        return initialState
+      })
   },
 })
 

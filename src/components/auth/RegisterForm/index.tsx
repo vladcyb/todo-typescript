@@ -6,9 +6,10 @@ import UserThunk from '../../../store/userReducer/thunk'
 import { useAppDispatch } from '../../../store'
 import { Link as ReactLink } from 'react-router-dom'
 import routes from '../../../routes'
+import { FC } from 'react'
 
 
-function RegisterForm() {
+const RegisterForm: FC = () => {
 
   /* thunk */
   const [getters, setters] = useSetters()

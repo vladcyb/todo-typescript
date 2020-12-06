@@ -9,10 +9,10 @@ import { useAppDispatch } from '../../../store'
 import TodosThunk from '../../../store/todosReducer/thunk'
 import { getToken } from '../../../store/userReducer/selectors'
 import useDeleteTodo from '../../../hooks/useDeleteTodo'
-import React, { useState } from 'react'
+import React, { FC, useState } from 'react'
 
 
-function Todos() {
+const Todos: FC = () => {
 
   /* props */
   const todos = useSelector(getTodos)

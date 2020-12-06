@@ -1,5 +1,5 @@
 import Todos from './Todos'
-import { useEffect } from 'react'
+import { FC, useEffect } from 'react'
 import { useAppDispatch } from '../../store'
 import { Box, Button, Grid, Link } from '@material-ui/core'
 import './s.scss'
@@ -11,7 +11,7 @@ import { getToken, getUsername } from '../../store/userReducer/selectors'
 import globalActions from '../../store/globalActions'
 
 
-function TodosPage() {
+const TodosPage: FC = () => {
 
   /* thunk */
   const [getters, setters] = useSetters({ initialLoading: true })

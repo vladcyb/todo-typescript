@@ -2,9 +2,10 @@ import { useSelector } from 'react-redux'
 import { getToken } from '../../store/userReducer/selectors'
 import { Redirect } from 'react-router-dom'
 import routes from '../../routes'
+import { FC } from 'react'
 
 
-function IndexPage() {
+const IndexPage: FC = () => {
 
   /* hooks */
   const token = useSelector(getToken)

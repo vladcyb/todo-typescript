@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import './App.scss'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import LoginPage from './components/auth/LoginPage'
@@ -11,7 +11,7 @@ import { useSelector } from 'react-redux'
 import { getToken } from './store/userReducer/selectors'
 
 
-function App() {
+const App: FC = () => {
 
   const token = useSelector(getToken)
 

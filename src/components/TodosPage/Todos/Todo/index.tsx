@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction } from 'react'
+import { FC, useState } from 'react'
 import { TodoType } from '../../../../store/todosReducer/types'
 import { Box, Card, CircularProgress, Fade, IconButton } from '@material-ui/core'
 import './s.scss'
@@ -9,11 +9,11 @@ import { useAppDispatch } from '../../../../store'
 import TodosThunk from '../../../../store/todosReducer/thunk'
 import { useSelector } from 'react-redux'
 import { getToken } from '../../../../store/userReducer/selectors'
-import { StateType as DeletingTodoType } from '../../../../hooks/useDeleteTodo/types'
+import DeleteTodoConfirmation from './DeleteTodoConfirmation'
+
 
 type T = {
   todo: TodoType
-  setDeletingTodo: Dispatch<SetStateAction<DeletingTodoType>>
 }
 
 const Todo: FC<T> = (props) => {
@@ -22,8 +22,11 @@ const Todo: FC<T> = (props) => {
   const dispatch = useAppDispatch()
   const token = useSelector(getToken)
 
+  /* state */
+  const [anchor, setAnchor] = useState<null | HTMLElement>(null)
+
   /* props */
-  const { todo, setDeletingTodo } = props
+  const { todo } = props
 
   /* thunk */
   const [getters, setters] = useSetters()
@@ -38,11 +41,19 @@ const Todo: FC<T> = (props) => {
     }))
   }
 
-  const handleDeleteClick = () => {
-    setDeletingTodo({
+  const handleDeleteClick = (e: React.MouseEvent<HTMLElement>) => {
+    setAnchor(anchor ? null : e.currentTarget)
+  }
+
+  const onDelete = () => {
+    dispatch(thunk.deleteTodo({
+      token,
       id: todo.id,
-      title: todo.title,
-    })
+    }))
+  }
+
+  const cancelDeleting = () => {
+    setAnchor(null)
   }
 
   /* classes */
@@ -51,17 +62,24 @@ const Todo: FC<T> = (props) => {
   })
 
   return (
-    <Fade in={true}>
-      <Box className={classes} mt={1}>
+    <Fade in>
+      <Box className={classes} pt={1}>
         <Card className="Todo__card" elevation={1}>
           <div className="Todo__text">
             <div className="Todo__title">{todo.title}</div>
             <div className="Todo__description">{todo.description}</div>
           </div>
           <div className="Todo__actions">
-            <IconButton size="small" onClick={handleDeleteClick}>
-              <Delete fontSize="small" />
-            </IconButton>
+            <div className="Todo__remove">
+              <DeleteTodoConfirmation
+                onDelete={onDelete}
+                onClose={cancelDeleting}
+                anchor={anchor}
+              />
+              <IconButton size="small" onClick={handleDeleteClick}>
+                <Delete fontSize="small" />
+              </IconButton>
+            </div>
             {getters.loading ? (
               <div className="Todo__progress">
                 <CircularProgress size="30px" />

@@ -8,7 +8,6 @@ import { useSetters } from '../../../hooks/useSetters'
 import { useAppDispatch } from '../../../store'
 import TodosThunk from '../../../store/todosReducer/thunk'
 import { getToken } from '../../../store/userReducer/selectors'
-import useDeleteTodo from '../../../hooks/useDeleteTodo'
 import React, { FC, useState } from 'react'
 
 
@@ -23,7 +22,6 @@ const Todos: FC = () => {
   const description = useField('description', getters, setters)
   const dispatch = useAppDispatch()
   const token = useSelector(getToken)
-  const deletingTodo = useDeleteTodo()
   const [deleteAllTodosAttempt, setDeleteAllTodosAttempt] = useState(false)
 
   /* thunk */
@@ -56,18 +54,6 @@ const Todos: FC = () => {
     setDeleteAllTodosAttempt(false)
   }
 
-  const cancelDelete = () => {
-    deletingTodo.props.onClose()
-  }
-
-  const deleteTodo = () => {
-    dispatch(thunk.deleteTodo({
-      token,
-      id: deletingTodo.get.id,
-    }))
-    deletingTodo.props.onClose()
-  }
-
   const cancelDeleteDone = () => {
     setDeleteAllTodosAttempt(false)
   }
@@ -76,7 +62,7 @@ const Todos: FC = () => {
     <Card className="Todos" variant="elevation" color="primary" elevation={5}>
       <Button onClick={handleDeleteDoneClick}>Delete done todos</Button>
       {todos.map((todo) => (
-        <Todo key={todo.id} todo={todo} setDeletingTodo={deletingTodo.set} />
+        <Todo key={todo.id} todo={todo} />
       ))}
       <form onSubmit={handleAddTodo}>
         <Box mt={2}>
@@ -107,13 +93,6 @@ const Todos: FC = () => {
           </Button>
         </Box>
       </form>
-      <Dialog {...deletingTodo.props}>
-        <DialogTitle>Delete {deletingTodo.get.title}?</DialogTitle>
-        <DialogActions>
-          <Button onClick={deleteTodo} color="secondary">Yes</Button>
-          <Button onClick={cancelDelete}>Cancel</Button>
-        </DialogActions>
-      </Dialog>
       <Dialog
         open={deleteAllTodosAttempt}
         onClose={cancelDeleteDone}

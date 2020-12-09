@@ -10,6 +10,7 @@
   min-height: 70px;
   display: grid;
   grid-template-columns: 1fr 70px;
+  overflow: visible !important;
 }
 
 .Todo__title {
@@ -46,4 +47,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.Todo__remove {
+  position: relative;
 }

@@ -1,0 +1,19 @@
+.DeleteTodoConfirmation {
+  border: 1px solid gray;
+  border-radius: 4px;
+  color: black;
+  background: white;
+}
+
+.DeleteTodoConfirmation__buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.DeleteTodoConfirmation__yes {
+  color: #0c7000;
+}
+
+.DeleteTodoConfirmation__no {
+  color: #ff4646;
+}

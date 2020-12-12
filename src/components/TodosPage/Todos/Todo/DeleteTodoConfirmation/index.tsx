@@ -1,7 +1,6 @@
 import { FC } from 'react'
-import { Box, IconButton, Popper } from '@material-ui/core'
+import { Box, Button, Popper } from '@material-ui/core'
 import './s.scss'
-import { Clear, Done } from '@material-ui/icons'
 
 
 type T = {
@@ -25,12 +24,12 @@ const DeleteTodoConfirmation: FC<T> = (props) => {
       <Box p={1}>
         <div className="DeleteTodoConfirmation__title">Delete?</div>
         <div className="DeleteTodoConfirmation__buttons">
-          <IconButton size="small" onClick={onDelete}>
-            <Done className="DeleteTodoConfirmation__yes" fontSize="small" />
-          </IconButton>
-          <IconButton size="small" onClick={onClose}>
-            <Clear className="DeleteTodoConfirmation__no" fontSize="small" />
-          </IconButton>
+          <Button size="small" onClick={onDelete} color="secondary">
+            Yes
+          </Button>
+          <Button size="small" onClick={onClose} color="primary">
+            No
+          </Button>
         </div>
       </Box>
     </Popper>
